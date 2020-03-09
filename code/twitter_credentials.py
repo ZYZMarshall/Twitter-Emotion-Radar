@@ -1,5 +1,7 @@
-ACCESS_TOKEN = "225803730651619330-UtOLaV6RQBiVtOcrHDSpt4KNiAaSx4"
-ACCESS_TOKEN_SECRET = "4L60kZBtFg1kskzEerSIa6YUYILsakQUy0sogGfMewuOO"
-CONSUMER_KEY = "g5HoWrzyJf1Mq8LrARcoVT4bc"
-CONSUMER_SECRET = "ieyCbmHmQnib2I9KwUH8ywk7ZgTO7bWqv43xuTqTiR3VOlpQ5g"
+#Don't upload real token and key
+
+ACCESS_TOKEN = "dasdsadasd"
+ACCESS_TOKEN_SECRET = "dsada"
+CONSUMER_KEY = "dasda"
+CONSUMER_SECRET = "dsadwqrf"
 
