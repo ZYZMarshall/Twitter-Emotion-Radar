@@ -6,6 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="startbootstrap-sb-admin-2-gh-pages" />
     <orderEntry type="module" module-name="watchlist1" />
+    <orderEntry type="module" module-name="startbootstrap-sb-admin-2-gh-pages" />
   </component>
   <component name="PyDocumentationSettings">
     <option name="renderExternalDocumentation" value="true" />
