@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Twitter-Emotion-Radar.iml" filepath="$PROJECT_DIR$/.idea/Twitter-Emotion-Radar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Documents/Stevens_Courses/SSW-695/Website Templates/startbootstrap-sb-admin-2-gh-pages/.idea/startbootstrap-sb-admin-2-gh-pages.iml" filepath="$PROJECT_DIR$/../Documents/Stevens_Courses/SSW-695/Website Templates/startbootstrap-sb-admin-2-gh-pages/.idea/startbootstrap-sb-admin-2-gh-pages.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../watchlist1/.idea/watchlist1.iml" filepath="$PROJECT_DIR$/../watchlist1/.idea/watchlist1.iml" />
     </modules>
   </component>
 </project>
