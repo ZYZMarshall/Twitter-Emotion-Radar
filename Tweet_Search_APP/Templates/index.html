@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% for message in get_flashed_messages() %}
+        <div class="alert">{{ message }}</div>
+    {% endfor %}
+    <title>Tweet Search</title>
+</head>
+
+<body>
+
+        <form method="post">
+            Keyword <input value="Tesla" type="text" name="keyword" autocomplete="off" required>
+            Begin Year <input value="2020" type="text" name="begin_year" autocomplete="off" required>
+            Begin Month <input value="3" type="text" name="begin_month" autocomplete="off" required>
+            Begin Day <input value="19" type="text" name="begin_day" autocomplete="off" required>
+
+            End Year <input value="2020" type="text" name="end_year" autocomplete="off" required>
+            End Month <input value="3" type="text" name="end_month" autocomplete="off" required>
+            End Day <input value="20" type="text" name="end_day" autocomplete="off" required>
+
+            <input class="btn" type="submit" name="submit" value="Search">
+        </form>
+
+<ul>
+    {% for tweet in tweets %}
+    <li>{{tweet.text}}</li>
+    {% endfor %}
+</ul>
+
+</body>
+
+</html>
