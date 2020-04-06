@@ -1,0 +1,335 @@
+{% load static from staticfiles%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="cosmic">
+	<meta name="keywords" content="Bootstrap 3, Template, Theme, Responsive, Corporate, Business">
+	<link rel="shortcut icon" href="/assets/img/favicon.png">
+
+	<title>
+		Twitter Data Sentiment Analysis
+	</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/assets/css/theme.css" rel="stylesheet">
+	<link href="/assets/css/bootstrap-reset.css" rel="stylesheet">
+	<!-- <link href="/assets/css/bootstrap.min.css" rel="stylesheet">-->
+
+	<!--external css-->
+	<link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/assets/css/flexslider.css" />
+	<link href="/assets/bxslider/jquery.bxslider.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/assets/css/animate.css">
+	<link rel="stylesheet" href="/assets/owlcarousel/owl.carousel.css">
+	<link rel="stylesheet" href="/assets/owlcarousel/owl.theme.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.css">
+	<link href="/assets/css/superfish.css" rel="stylesheet" media="screen">
+	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> -->
+
+
+	<!-- Custom styles for this template -->
+	<link rel="stylesheet" type="text/css" href="/assets/css/component.css">
+	<link href="/assets/css/style.css" rel="stylesheet">
+	<link href="/assets/css/style-responsive.css" rel="stylesheet" />
+
+	<link rel="stylesheet" type="text/css" href="/assets/css/parallax-slider/parallax-slider.css" />
+	<script type="text/javascript" src="/assets/js/parallax-slider/modernizr.custom.28468.js">
+
+	</script>
+	<script src="/assets/js/jquery.js"></script>
+	<script src="/assets/jquery.validate.min.js"></script>
+	<script src="/assets/additional-methods.min.js"></script>
+	<script src="/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/assets/js/hover-dropdown.js"></script>
+	<script src="/assets/owlcarousel/owl.carousel.js"></script>
+	<script type="text/javascript" src="/assets/bxslider/jquery.bxslider.js"></script>
+	<script defer src="/assets/js/jquery.flexslider.js"></script>
+	<script src="/assets/js/jquery.easing.min.js"></script>
+	<script src="/assets/js/link-hover.js"></script>
+	<script type="text/javascript" src="/assets/js/jquery-ui.js"></script>
+
+	<script src="/assets/js/chart.bundle.min.js"></script>
+
+	<!--common script for all pages-->
+	<script src="/assets/js/common-scripts.js"></script>
+	<script src="/assets/js/wow.min.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+	<!--[if lt IE 9]>
+    <script src="/assets/js/html5shiv.js">
+    </script>
+    <script src="/assets/js/respond.min.js">
+    </script>
+    <![endif]-->
+</head>
+
+<body>
+	<!--header start-->
+	<header class="head-section">
+		<div class="navbar navbar-default navbar-static-top container">
+			<div class="navbar-header">
+				<button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+				<a class="navbar-brand" href="/">Twitter Data Sentiment Analysis</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/">Home</a></li>
+					<li><a href="/pages/about">About</a></li>
+					{% if request.session.user_level_id == 1 %}		
+					<li><a href="/users/dashboard">Dashboard</a></li>		
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">Administration <i class="fa fa-angle-down"></i>
+                      </a>
+						<ul class="dropdown-menu">
+							<li><a href="/configuration/update/1">Update Configuration</a></li>
+							<li><a href="/analysis/add">Start Analysis</a></li>
+							<li><a href="/users/add">Add New User</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">Reports <i class="fa fa-angle-down"></i>
+                      </a>
+						<ul class="dropdown-menu">
+							<li><a href="/users/report/1">User Report</a></li>
+							<li><a href="/analysis/">Analysis Report</a></li>
+						</ul>
+					</li>
+					{% endif %}
+					{% if request.session.authenticated %}	
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">My Account <i class="fa fa-angle-down"></i>
+                      </a>
+						<ul class="dropdown-menu">
+							<li><a href="/users/update/{{ request.session.user_id }}/">My Account</a></li>
+							<li><a href="/users/changepassword">Change Password</a></li>
+						</ul>
+					</li>
+					<li><a href="/users/logout">Logout</a></li>
+					{% else %}
+					<li><a href="/users">Login</a></li>
+					<li><a href="/pages/contact">Contact Us</a></li>
+					{% endif %}
+				</ul>
+				</ul>
+			</div>
+		</div>
+	</header>
+	<!--header end-->
+	{% block content %} {% endblock content %}
+	<div class="modal fade" id="myModal-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Record Delete Confirmation ?</h4>
+				</div>
+				<div class="modal-body">
+					<form role="form" class="form-inline">
+						<div class="form-group">
+							Do you want to delete the record ?
+						</div>
+						<div class="rows" style="float:right; margin-top:15px;">
+							<button class="btn btn-danger" type="button" onClick="delete_record()">Delete</button>
+							<button class="btn btn-success" type="button" class="close" data-dismiss="modal" aria-hidden="true">Cancel</button>
+						</div>
+					</form>
+					<div style="clear:both"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!--footer start-->
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-sm-3 address wow fadeInUp" data-wow-duration="2s" data-wow-delay=".1s">
+					<h1>
+						contact info
+					</h1>
+					<address>
+						<p><i class="fa fa-home pr-10"></i>Address: No.XXXXXX street</p>
+						<p><i class="fa fa-globe pr-10"></i>Mars city, Country </p>
+						<p><i class="fa fa-mobile pr-10"></i>Mobile : (123) 456-7890 </p>
+						<p><i class="fa fa-phone pr-10"></i>Phone : (123) 456-7890 </p>
+						<p><i class="fa fa-envelope pr-10"></i>Email : <a href="javascript:;">support@example.com</a></p>
+					</address>
+				</div>
+				<div class="col-lg-3 col-sm-3">
+					<div class="page-footer wow fadeInUp" data-wow-duration="2s" data-wow-delay=".5s">
+						<h1>Modules</h1>
+						<ul class="page-footer-list">
+							<li>
+								<i class="fa fa-angle-right"></i>
+								<a href="#">Analysis Module</a>
+							</li>
+							<li>
+								<i class="fa fa-angle-right"></i>
+								<a href="#">User Module</a>
+							</li>
+							<li>
+								<i class="fa fa-angle-right"></i>
+								<a href="#">Configuration Module</a>
+							</li>
+							<li>
+								<i class="fa fa-angle-right"></i>
+								<a href="#">Login Module</a>
+							</li>
+							<li>
+								<i class="fa fa-angle-right"></i>
+								<a href="#">History Module</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-3 col-sm-3">
+					<div class="page-footer wow fadeInUp" data-wow-duration="2s" data-wow-delay=".5s">
+						<h1>Project Links</h1>
+						<ul class="page-footer-list">
+							<li>
+								<i class="fa fa-angle-right"></i>
+								<a href="#">Home</a>
+							</li>
+							<li>
+								<i class="fa fa-angle-right"></i>
+								<a href="#">About Us</a>
+							</li>
+							<li>
+								<i class="fa fa-angle-right"></i>
+								<a href="#">Contact</a>
+							</li>
+							<li>
+								<i class="fa fa-angle-right"></i>
+								<a href="#">Login</a>
+							</li>
+							<li>
+								<i class="fa fa-angle-right"></i>
+								<a href="#">Email Us</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-3 col-sm-3">
+					<div class="text-footer wow fadeInUp" data-wow-duration="2s" data-wow-delay=".7s">
+						<h1>
+							About Project
+						</h1>
+						<p>Opinion mining (sometimes known as sentiment analysis or emotion AI) refers to the use of natural language processing, text analysis, computational linguistics, and biometrics to systematically identify, extract, quantify, and study affective states and subjective information.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- footer end -->
+	<!--small footer start -->
+	<footer class="footer-small">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="copyright">
+						<p>&copy; Copyright Twitter Data Sentiment Analysis.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!--small footer end-->
+	<script>
+		wow = new WOW(
+			{
+				boxClass: 'wow',      // default
+				animateClass: 'animated', // default
+				offset: 0          // default
+			}
+		)
+		wow.init();
+	</script>
+
+
+	<script>
+		$(window).load(function () {
+			$('[data-zlname = reverse-effect]').mateHover({
+				position: 'y-reverse',
+				overlayStyle: 'rolling',
+				overlayBg: '#fff',
+				overlayOpacity: 0.7,
+				overlayEasing: 'easeOutCirc',
+				rollingPosition: 'top',
+				popupEasing: 'easeOutBack',
+				popup2Easing: 'easeOutBack'
+			}
+			);
+		}
+		);
+
+		$(window).load(function () {
+			$('.flexslider').flexslider({
+				animation: "slide",
+				start: function (slider) {
+					$('body').removeClass('loading');
+				}
+			}
+			);
+		}
+		);
+
+		$(document).ready(function () {
+
+			$("#owl-demo").owlCarousel({
+				items: 4,
+			}
+			);
+
+		}
+		);
+
+
+
+
+		$(window).scroll(function () {
+			$('#skillz').each(function () {
+				var imagePos = $(this).offset().top;
+				var viewportheight = window.innerHeight;
+				console.log(viewportheight);
+				var topOfWindow = $(window).scrollTop();
+				if (imagePos < topOfWindow + viewportheight) {
+					$('.skill_bar').fadeIn('slow');
+					$('.skill_one').animate({
+						width: '60%'
+					}
+						, 2000);
+					$('.skill_two').animate({
+						width: '90%'
+					}
+						, 2000);
+					$('.skill_three').animate({
+						width: '70%'
+					}
+						, 1000);
+					$('.skill_four').animate({
+						width: '55%'
+					}
+						, 1000);
+					$('.skill_bar_progress p').fadeIn('slow', function () {
+
+					}
+					);
+				}
+			}
+			);
+		}
+		);
+	</script>
+
+</body>
+
+</html>

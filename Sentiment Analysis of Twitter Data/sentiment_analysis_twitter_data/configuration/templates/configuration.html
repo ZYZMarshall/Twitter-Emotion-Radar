@@ -1,0 +1,78 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+	jQuery(function () {
+		jQuery("#appointment_date").datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "0:+1",
+			dateFormat: 'd MM,yy'
+		});
+	});
+</script>
+<!--breadcrumbs start-->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-sm-4">
+				<h1>{{heading}}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="registration-bg">
+	<div class="row">
+		<form enctype="multipart/form-data" method="post" class="form-signin wow fadeInUp" action="" style="max-width:60%">
+			{% csrf_token %}
+			<h2 class="form-signin-heading">
+				{% if fn == "add" %}
+					Add New Configuration
+				{% elif fn == "update" %}
+					Update Configuration
+				{% endif %}
+			</h2>
+			{% if messages %}
+				<div class="alert alert-success fade in" style="margin:10px;">
+					{% for message in messages %}
+						<strong>{{ message }}</strong>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="login-wrap">
+				<div>
+					<label for="pwd">Consumer Key</label>
+					<input type="text" value="{{configurationDetails.configuration_consumer_key}}" name="configuration_consumer_key" id="configuration_consumer_key" class="form-control" placeholder="Configuration Key" required>
+				</div>
+				<div>
+					<label for="pwd">Consumer Secret</label>
+					<input type="text" value="{{configurationDetails.configuration_consumer_secret}}" name="configuration_consumer_secret" id="configuration_consumer_secret" class="form-control" placeholder="Consumer Secret" required>
+				</div>
+				<div>
+					<label for="pwd">Consumer Access Token</label>
+					<input type="text" value="{{configurationDetails.configuration_access_token}}" name="configuration_access_token" id="configuration_access_token" class="form-control" placeholder="Consumer Access Token" required>
+				</div>
+				<div>
+					<label for="pwd">Consumer Token Secret</label>
+					<input type="text" value="{{configurationDetails.configuration_access_token_secret}}" name="configuration_access_token_secret" id="configuration_access_token_secret" class="form-control" placeholder="Consumer Token Secret" required>
+				</div>
+				<button class="btn btn-lg btn-login btn-block" type="submit">Submit</button>
+			</div>
+			<input type="hidden" name="act" value="save_configuration">
+			<input type="hidden" name="user_id" value="{{configurationlist.configuration_id}}">
+		</form>
+	</div>
+</div>
+{% if appointmentdetails %}
+<script>
+	$(".update-appointment").hide();
+</script>
+{% endif %}
+{% if request.session.appointment_level_id != 1 %}
+<script>
+	$(".role-options").hide();
+</script>
+{% endif %}
+<!--container end-->
+{% endblock content %}

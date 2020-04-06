@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block content %}
+<!--breadcrumbs start-->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4">
+                <h1>Login</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="login-bg">
+    <div class="container">
+        <div class="form-wrapper">
+            <form onsubmit="/signin" method="post" class="form-signin wow fadeInUp">
+                 {% csrf_token %}
+                <h2 class="form-signin-heading">Login to your account </h2>
+                {% if error == True %}
+                <div class="alert alert-danger fade in" style="margin:10px;">
+                    <strong>{{message}}</strong>
+                </div>
+                {% endif %}
+                <div class="login-wrap">
+                    <input type="text" class="form-control" placeholder="User ID" autofocus name="username" required>
+                    <input type="password" class="form-control" placeholder="Password" name="password" required>
+                    <label class="checkbox">
+                    <span class="pull-right">
+                       &nbsp;
+                    </span>
+                </label>
+                    <button class="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
+                </div>
+                <input type="hidden" name="act" value="check_login">
+            </form>
+        </div>
+    </div>
+</div>
+<!--container end-->
+{% endblock content %}

@@ -1,0 +1,121 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+
+</style>
+<!--breadcrumbs start-->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-sm-12">
+				<h1>Sentiment Analysis of {{analysisdetail.analysis_topic}}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="container">
+	<div class="row">
+		<div style="border:1px solid #CCCCCC; padding:10px; margin-bottom: 10px">
+			<h3 style="color:#3a5164">Sentiment Analysis for {{analysisdetail.analysis_topic}} on  {{analysisdetail.analysis_total_tweets}} Tweets - Bar Chart</h3>
+			<canvas id="bar" width="400px" height="400px"></canvas>
+		</div>		
+		<div style="border:1px solid #CCCCCC; padding:10px; margin-bottom: 10px">
+				<h3 style="color:#3a5164">Sentiment Analysis for Twitter Data - Horizontal Chart</h3>
+			<canvas id="horizontal" width="400px" height="400px"></canvas>
+		</div>		
+		<div style="border:1px solid #CCCCCC; padding:10px; margin-bottom: 10px">
+			<h3 style="color:#3a5164">Sentiment Analysis for Twitter Data - Pie Chart</h3>
+			<canvas id="pie" width="400px" height="400px"></canvas>
+		</div>		
+		<div style="border:1px solid #CCCCCC; padding:10px; margin-bottom:100px">		
+			<h3 style="color:#3a5164">Sentiment Analysis for Twitter Data - Doughnut Chart</h3>
+			<canvas id="doughnut" width="400px" height="400px"></canvas>
+		</div>		
+			<script>
+				var data = {
+					labels: ["Positive", "Weakly Positive", "Strongly Positive","Neutral", "Negative", "Weakly Negative", "Strongly Negative"],
+					datasets: [{
+						label: 'Twitter Sentiment Analysis Results',
+						data: [
+							{{sentimentdetails.sentiment_positive}}, 
+							{{sentimentdetails.sentiment_weakly_positive}},
+							{{sentimentdetails.sentiment_strongly_positive}},
+							{{sentimentdetails.sentiment_neutral}},
+							{{sentimentdetails.sentiment_negative}},
+							{{sentimentdetails.sentiment_weakly_negetive}},
+							{{sentimentdetails.sentiment_strongly_negetive}}
+						],
+						backgroundColor: [
+							'rgba(0, 255, 0, 0.2)',
+							'rgba(35, 92, 162, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(255, 54, 100, 0.2)',
+							'rgba(175, 92, 89, 0.2)',
+							'rgba(155, 106, 36, 0.2)',
+							'rgba(195, 16, 16, 0.2)',
+						],
+						borderColor: [
+							'rgba(0, 255, 0, 1)',
+							'rgba(35, 92, 162, 1)',
+							'rgba(255, 206, 86, 1)',
+							'rgba(255,99,132,1)',
+							'rgba(175, 92, 89, 1)',
+							'rgba(155, 106, 36, 1)',
+							'rgba(195, 16, 16, 1)',
+						],
+						borderWidth: 2
+					}]
+				};
+				var options = {
+					responsive: true,
+					maintainAspectRatio: true,
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					}
+				};
+				var barChart = document.getElementById("bar");
+				barChart.height = 80;
+				barChart.width = 300;
+				var horizontalChart = document.getElementById("horizontal");
+				horizontalChart.height = 100;
+				var doughnut = document.getElementById("doughnut");
+				doughnut.height = 100;
+				var pie = document.getElementById("pie");
+				pie.height = 100;
+
+				var bar = new Chart(barChart, {
+					type: 'bar',
+					data: data,
+					options: options
+				});
+				
+
+				var horizontal = new Chart(horizontalChart, {
+					type: 'horizontalBar',
+					data: data,
+					options: options
+				});
+
+				var myPie = new Chart(pie,{
+					type: 'pie',
+					data: data,
+					options: options
+				});
+
+				var myDoughnut = new Chart(doughnut, {
+					type: 'doughnut',
+					data: data,
+					options: options
+				});
+
+			</script>
+	</div>
+</div>
+<!--container end-->
+{% endblock content %}

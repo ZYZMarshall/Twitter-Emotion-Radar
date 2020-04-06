@@ -1,0 +1,79 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+    .btn.btn-circle {
+        line-height: 30px;
+        padding: 0;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        background-color: #3a5164;
+        color: #ffffff;
+        width: 150px;
+        height: 150px;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .btn-circle div{
+      margin-top: 40px;
+    }
+    .mydash {
+        border:1px solid #57889c;
+        padding:10px;
+        margin:10px;
+    }
+    .col-lg-2 {
+        width:14.667%;
+    }
+    </style>      
+        <!--breadcrumbs start-->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-sm-4">
+                {% if request.session.user_level_id == 1 %}	
+                    <h1>Admin Dashboard</h1>
+                {% endif %}
+                {% if request.session.user_level_id == 2 %}	
+                    <h1>Student Dashboard</h1>
+                {% endif %}
+                {% if request.session.user_level_id == 3 %}	
+                    <h1>Teacher Dashboard</h1>
+                {% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+<div class="registration-bg">
+	<div class="container">
+        {% if request.session.user_level_id == 1 %}		
+        <div class="container w">
+            <div class="row">
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/configuration/update/1" class="btn btn-default btn-circle"><div>Configuration<br>Management</div></a>	
+                </div><!--/.col-->	
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/analysis/add" class="btn btn-default btn-circle"><div>Sentiment<br>Analysis</div></a>	
+                </div><!--/.col-->
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/analysis" class="btn btn-default btn-circle"><div>Analysis<br>History</div></a>	
+                </div><!--/.col-->						
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/users/update/{{ request.session.user_id }}/" class="btn btn-default btn-circle"><div>My<br>Account</div></a>	
+                </div><!--/.col-->
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/users/changepassword" class="btn btn-default btn-circle"><div>Change<br>Password</div></a>	
+                </div><!--/.col-->
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/users/logout" class="btn btn-default btn-circle" style="padding-top:13px;"><div>Logout</div></a>	
+                </div><!--/.col-->
+                
+            </div><!-- row -->				  
+    
+            <br>
+            <br>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+        

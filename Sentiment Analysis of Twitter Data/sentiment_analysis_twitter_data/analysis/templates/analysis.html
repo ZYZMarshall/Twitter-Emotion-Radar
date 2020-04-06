@@ -1,0 +1,79 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+	jQuery(function () {
+		jQuery("#analysis_date").datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "0:+1",
+			dateFormat: 'd MM,yy'
+		});
+	});
+</script>
+<!--breadcrumbs start-->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-sm-4">
+				<h1>{{heading}}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="registration-bg">
+	<div class="row">
+		<form enctype="multipart/form-data" method="post" class="form-signin wow fadeInUp" action="" style="max-width:60%">
+			{% csrf_token %}
+			<h2 class="form-signin-heading">
+				{% if fn == "add" %}
+					Start a new analysis
+				{% elif fn == "update" %}
+					Update Analysis
+				{% endif %}
+			</h2>
+			{% if messages %}
+				<div class="alert alert-success fade in" style="margin:10px;">
+					{% for message in messages %}
+						<strong>{{ message }}</strong>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="login-wrap">
+				<div>
+					<label for="pwd">Twitter Topic</label>
+					<input type="text" value="{{analysisDetails.analysis_topic}}" name="analysis_topic" id="analysis_topic" class="form-control" placeholder="Twitter Topic" required>
+				</div>
+				<div>
+					<label for="pwd">No. of Tweets</label>
+					<input type="text" value="{{analysisDetails.analysis_total_tweets}}" name="analysis_total_tweets" id="analysis_total_tweets" class="form-control" placeholder="Number of Tweets" required>
+				</div>
+				<div>
+					<label for="pwd">Date</label>
+					<input type="text" value="{{analysisDetails.analysis_date}}" name="analysis_date" id="analysis_date" class="form-control" placeholder="Date" required>
+				</div>
+
+				<div style="clear:both">
+					<label for="pwd">Descriptions</label>
+					<textarea class="form-control" style="height:150px;" placeholder="Description" autofocus="" name="analysis_description" id="analysis_description" required>{{analysisDetails.analysis_description}}</textarea>
+				</div><br>
+				<button class="btn btn-lg btn-login btn-block" type="submit">Submit</button>
+			</div>
+			<input type="hidden" name="act" value="save_analysis">
+			<input type="hidden" name="user_id" value="{{analysislist.analysis_id}}">
+		</form>
+	</div>
+</div>
+{% if appointmentdetails %}
+<script>
+	$(".update-appointment").hide();
+</script>
+{% endif %}
+{% if request.session.appointment_level_id != 1 %}
+<script>
+	$(".role-options").hide();
+</script>
+{% endif %}
+<!--container end-->
+{% endblock content %}
