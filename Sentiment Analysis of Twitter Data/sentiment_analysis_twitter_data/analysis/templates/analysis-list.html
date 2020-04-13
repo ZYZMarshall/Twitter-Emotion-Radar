@@ -24,15 +24,7 @@
 		<div style="border:1px solid #CCCCCC; padding:10px; margin-bottom: 10px">
 				<h3 style="color:#3a5164">Sentiment Analysis for Twitter Data - Horizontal Chart</h3>
 			<canvas id="horizontal" width="400px" height="400px"></canvas>
-		</div>		
-		<div style="border:1px solid #CCCCCC; padding:10px; margin-bottom: 10px">
-			<h3 style="color:#3a5164">Sentiment Analysis for Twitter Data - Pie Chart</h3>
-			<canvas id="pie" width="400px" height="400px"></canvas>
-		</div>		
-		<div style="border:1px solid #CCCCCC; padding:10px; margin-bottom:100px">		
-			<h3 style="color:#3a5164">Sentiment Analysis for Twitter Data - Doughnut Chart</h3>
-			<canvas id="doughnut" width="400px" height="400px"></canvas>
-		</div>		
+		</div>			
 			<script>
 				var data = {
 					labels: ["Positive", "Weakly Positive", "Strongly Positive","Neutral", "Negative", "Weakly Negative", "Strongly Negative"],
@@ -84,10 +76,7 @@
 				barChart.width = 300;
 				var horizontalChart = document.getElementById("horizontal");
 				horizontalChart.height = 100;
-				var doughnut = document.getElementById("doughnut");
-				doughnut.height = 100;
-				var pie = document.getElementById("pie");
-				pie.height = 100;
+			
 
 				var bar = new Chart(barChart, {
 					type: 'bar',
@@ -98,18 +87,6 @@
 
 				var horizontal = new Chart(horizontalChart, {
 					type: 'horizontalBar',
-					data: data,
-					options: options
-				});
-
-				var myPie = new Chart(pie,{
-					type: 'pie',
-					data: data,
-					options: options
-				});
-
-				var myDoughnut = new Chart(doughnut, {
-					type: 'doughnut',
 					data: data,
 					options: options
 				});
