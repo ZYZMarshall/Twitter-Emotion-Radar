@@ -8,18 +8,18 @@ class TestUrls(SimpleTestCase):
         url = reverse('analysis-listing')
         self.assertEqual(resolve(url).func, listing)
         
-    def test_list_url_is_resolved02(self):
+    def test_details_url_is_resolved02(self):
         url = reverse('analysis-details')
         self.assertEqual(resolve(url).func, details)
 
-    def test_list_url_is_resolved03(self):
+    def test_add_url_is_resolved03(self):
         url = reverse('add')
         self.assertEqual(resolve(url).func, add)
         
-    def test_list_url_is_resolved04(self):
+    def test_delete_url_is_resolved04(self):
         url = reverse('delete')
         self.assertEqual(resolve(url).func, delete)
         
-    def test_list_url_is_resolved05(self):
+    def test_update_url_is_resolved05(self):
         url = reverse('update')
         self.assertEqual(resolve(url).func, update)
