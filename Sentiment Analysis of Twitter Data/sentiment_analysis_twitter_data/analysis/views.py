@@ -21,6 +21,7 @@ def getAPIKey(id):
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM configuration WHERE configuration_id = " + id)
     dataList = dictfetchall(cursor)
+    print("getAPIKey:",dataList[0])
     return dataList[0]
 
 keys = getAPIKey("1")
@@ -76,12 +77,14 @@ def getData(id):
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM analysis WHERE analysis_id = " + id)
     dataList = dictfetchall(cursor)
+    print("getData",dataList[0])
     return dataList[0]
 
 def getSentiment(id):
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM sentiment WHERE sentiment_anlysis_id = " + id)
     dataList = dictfetchall(cursor)
+    print("getSentiment",dataList[0])
     return dataList[0]
 
 def update(request, analysisId):
@@ -143,4 +146,5 @@ def getDropDown(table, condtion):
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM " + table + " WHERE " + condtion)
     dropdownList = dictfetchall(cursor)
+    print(dropdownList)
     return dropdownList
